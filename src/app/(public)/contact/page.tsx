@@ -48,10 +48,10 @@ export default function ContactPage() {
         <div className="text-center mb-20 space-y-6">
           <h2 className="text-emerald-600 font-black text-sm uppercase tracking-[0.3em]">Connect With Us</h2>
           <h1 className="text-5xl lg:text-7xl font-black text-slate-900 tracking-tighter">
-            Let's Start a <span className="text-emerald-600">Climate</span> Action.
+            Let&apos;s Start a <span className="text-emerald-600">Climate</span> Action.
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-slate-500 font-medium">
-            Whether you're an educator, student, or institutional leader, we're here to help you green your educational journey.
+            Whether you&apos;re an educator, student, or institutional leader, we&apos;re here to help you green your educational journey.
           </p>
         </div>
 
