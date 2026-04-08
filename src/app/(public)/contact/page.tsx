@@ -10,13 +10,10 @@ import {
   Globe, 
   MessageSquare,
   Clock,
-  CheckCircle2,
-  Linkedin,
-  Twitter,
-  Instagram,
-  Facebook
+  CheckCircle2
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 // --- Shared SVGs for Socials ---
 const FacebookIcon = ({ className }: { className?: string }) => (
