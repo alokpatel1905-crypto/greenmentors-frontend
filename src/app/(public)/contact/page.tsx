@@ -7,9 +7,6 @@ import {
   MapPin, 
   Phone, 
   Send, 
-  Globe, 
-  MessageSquare,
-  Clock,
   CheckCircle2
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
