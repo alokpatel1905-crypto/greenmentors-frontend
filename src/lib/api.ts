@@ -21,3 +21,31 @@ export async function apiFetch(
 
   return res.json();
 }
+
+// ==== CMS Helpers ====
+
+export async function getPageContent(slug: string) {
+  try {
+    const res = await fetch(`${API_URL}/pages/public/${slug}`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching page:", error);
+    return null;
+  }
+}
+
+export async function getAllPages() {
+  return apiFetch('/pages');
+}
+
+export async function updatePageContent(id: string, payload: any) {
+  return apiFetch(`/pages/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function getPageHistory(id: string) {
+  return apiFetch(`/pages/${id}/history`);
+}

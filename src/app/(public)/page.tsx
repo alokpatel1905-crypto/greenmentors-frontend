@@ -1,20 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight, Globe, Leaf, GraduationCap, Award, Users, ChevronRight, BookOpen, Building, Target, Network, Mail } from 'lucide-react';
-
-const NAV_LINKS = [
-  { label: 'About', href: '#about' },
-  { label: 'Impact', href: '#impact' },
-  { label: 'Accreditation', href: '#accreditation' },
-  { label: 'Rankings', href: '#rankings' },
-  { label: 'Events', href: '#events' },
-  { label: 'Awards', href: '#awards' },
-  { label: 'Networks', href: '#networks' },
-  { label: 'Support Us', href: '#support' },
-  { label: 'Media', href: '#media' },
-  { label: 'Contact', href: '#contact' }
-];
+import React from 'react';
+import { ArrowRight, Globe, GraduationCap, Users, ChevronRight, BookOpen, Building, Target, Network } from 'lucide-react';
 
 const ECOSYSTEM_PROGRAMS = [
   { title: 'Programs', items: ['Green School', 'Green University', 'Green Teacher', 'Green Graduate', 'Green Fellowship'] },
@@ -40,106 +27,6 @@ const MEGA_CATEGORIES = [
   { title: "Network", links: ["Global Green Teacher Network", "Global Green Schools Network", "Global Green University Network", "Global Green Graduates Network", "Global Green Innovator Network"] },
   { title: "Support Us", links: ["Green Graduate Accreditation", "Green Teacher Accreditation", "Green School Accreditation", "Green University Accreditation"] }
 ];
-
-const SOCIAL_ICONS = {
-  Facebook: ({ className, size = 20 }: { className?: string, size?: number }) => (
-    <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-  ),
-  Twitter: ({ className, size = 20 }: { className?: string, size?: number }) => (
-    <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-  ),
-  Linkedin: ({ className, size = 20 }: { className?: string, size?: number }) => (
-    <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-  )
-};
-
-const Header = () => (
-  <header className="pt-20 pb-12 px-8 flex flex-col items-center text-center relative z-20 bg-white">
-    <div className="flex flex-col items-center max-w-4xl mx-auto">
-      <div className="w-[88px] h-[88px] bg-emerald-800 rounded-full flex items-center justify-center shadow-lg shadow-emerald-900/10 mb-8 transition-transform hover:scale-105 duration-500 relative">
-        <Leaf className="w-10 h-10 text-white relative z-10" strokeWidth={1.5} />
-        <div className="absolute inset-0 bg-gradient-to-tr from-emerald-600 to-teal-400 rounded-full opacity-20 blur-md" />
-      </div>
-      
-      <h1 className="text-4xl md:text-5xl font-bold text-slate-800 tracking-tight mb-3">GREEN MENTORS</h1>
-      <p className="text-[12px] md:text-sm font-semibold text-emerald-800 uppercase tracking-[0.25em] mb-10">Global Responsible Education Network</p>
-      
-      <div className="flex flex-col gap-4 items-center">
-        <span className="text-[10px] md:text-[11px] font-bold text-emerald-700 uppercase tracking-[0.15em] bg-emerald-50 px-6 py-2.5 rounded-full border border-emerald-100">
-          Special Consultative Status with the United Nations ECOSOC
-        </span>
-        <span className="text-[15px] border-t border-slate-100 pt-5 md:text-base font-medium text-slate-500">
-          Education for a climate-conscious and sustainable future
-        </span>
-      </div>
-    </div>
-  </header>
-);
-
-const MainNav = ({ isScrolled }: { isScrolled: boolean }) => (
-  <nav className={`hidden lg:block w-full z-40 transition-all duration-300 sticky top-0 ${isScrolled ? "bg-white/95 backdrop-blur-xl border-b border-slate-200 py-5 shadow-sm" : "bg-white/90 backdrop-blur-md py-6 border-b border-slate-100"}`}>
-    <ul className="max-w-[1400px] mx-auto px-8 flex justify-center items-center flex-wrap gap-x-8 gap-y-2">
-      {NAV_LINKS.map((link) => (
-        <li key={link.label}>
-          <a href={link.href} className="text-[14px] font-semibold text-slate-600 hover:text-emerald-700 transition-colors relative group py-2 flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-sm">
-            {link.label}
-            <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-emerald-600 transition-all duration-300 group-hover:w-full rounded-full" />
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
-);
-
-const FloatingQuickNav = ({ activeSection }: { activeSection: string }) => (
-  <aside className="hidden xl:flex flex-col gap-4 fixed right-8 top-1/2 -translate-y-1/2 z-50 pointer-events-none">
-    {[{label: 'Home', href: '#home'}, ...NAV_LINKS].map((link) => {
-      const isActive = activeSection === link.href.substring(1);
-      return (
-        <a key={link.label} href={link.href} className="group flex items-center justify-end gap-4 outline-none pointer-events-auto" aria-label={`Navigate to ${link.label}`}>
-          <span className={`text-[10px] font-bold uppercase tracking-[0.15em] backdrop-blur-xl px-3 py-1.5 rounded-md transition-all duration-300 border ${isActive ? 'text-emerald-800 bg-emerald-50/90 border-emerald-200 translate-x-0 opacity-100 shadow-sm' : 'text-slate-500 bg-white/80 border-slate-200/50 opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 group-focus-visible:opacity-100 group-focus-visible:translate-x-0'}`}>
-            {link.label}
-          </span>
-          <div className={`w-2 h-2 rounded-full border transition-all duration-300 shadow-sm ${isActive ? 'border-emerald-600 bg-emerald-600 scale-125' : 'border-slate-300 bg-white group-hover:bg-emerald-500 group-hover:border-emerald-500 group-hover:scale-125 group-focus-visible:bg-emerald-500 group-focus-visible:scale-125'}`} />
-        </a>
-      );
-    })}
-  </aside>
-);
-
-const MobileNav = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = 'unset';
-    return () => { document.body.style.overflow = 'unset'; }
-  }, [isOpen]);
-
-  return (
-    <>
-      <div className="lg:hidden fixed top-6 right-6 z-[100]">
-        <button onClick={() => setIsOpen(!isOpen)} className="p-3 bg-white shadow-xl shadow-slate-200/50 rounded-full text-emerald-800 border border-slate-100 hover:bg-slate-50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500">
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {isOpen && (
-        <div className="fixed inset-0 bg-white z-[90] flex flex-col pt-32 px-10 overflow-y-auto lg:hidden animate-in fade-in slide-in-from-right-8 duration-300">
-          <ul className="flex flex-col gap-6 pb-32">
-            {[{label: 'Home', href: '#home'}, ...NAV_LINKS].map(link => (
-              <li key={link.label}>
-                <a href={link.href} onClick={() => setIsOpen(false)} className="text-3xl font-bold text-slate-800 hover:text-emerald-700 transition-colors border-b border-slate-100 pb-4 block">
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </>
-  );
-};
 
 const HeroSection = () => (
   <section id="home" className="relative py-24 lg:py-32 px-8 flex items-center min-h-[90vh] bg-white overflow-hidden scroll-mt-32">
@@ -216,7 +103,7 @@ const EcosystemLinksSection = () => (
             <ul className="flex flex-col gap-3">
               {category.items.map((item, i) => (
                 <li key={i}>
-                  <a href={`#${item.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`} className="group inline-flex items-center justify-between w-full px-5 py-3.5 rounded-2xl bg-slate-50 text-[13px] font-semibold text-slate-600 border border-slate-100 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800 transition-all duration-200">
+                  <a href={`/accreditation#${item.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`} className="group inline-flex items-center justify-between w-full px-5 py-3.5 rounded-2xl bg-slate-50 text-[13px] font-semibold text-slate-600 border border-slate-100 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800 transition-all duration-200">
                     <span className="truncate pr-4 leading-relaxed">{item}</span>
                     <ChevronRight size={14} className="text-slate-300 group-hover:text-emerald-500 group-hover:translate-x-1 shrink-0 transition-transform" />
                   </a>
@@ -271,7 +158,7 @@ const MegaNavSection = () => (
             <ul className="space-y-4 text-[14px] font-medium flex-grow w-full">
               {category.links.map((link, i) => (
                 <li key={i}>
-                  <a href={`#${link.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`} className="text-slate-400 hover:text-emerald-400 hover:translate-x-1 transition-all duration-200 inline-block py-1">
+                  <a href={`/accreditation#${link.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`} className="text-slate-400 hover:text-emerald-400 hover:translate-x-1 transition-all duration-200 inline-block py-1">
                     {link}
                   </a>
                 </li>
@@ -284,90 +171,13 @@ const MegaNavSection = () => (
   </section>
 );
 
-const MiniFooterStrip = () => (
-  <div className="bg-slate-950 py-10 px-8 border-b border-slate-800/50">
-    <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-      <a href="#home" className="flex items-center gap-4 group">
-        <div className="w-10 h-10 rounded-full border border-emerald-800/50 flex items-center justify-center bg-slate-900 group-hover:bg-emerald-900/50 transition-colors">
-          <Leaf className="w-4 h-4 text-emerald-600" />
-        </div>
-        <span className="font-black text-[15px] tracking-widest text-slate-200 uppercase">Green Mentors</span>
-      </a>
-      <div className="w-full h-px bg-slate-800/50 md:hidden" />
-      <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
-        <a href="#programs" className="hover:text-emerald-500 transition-colors">Our Programs</a>
-        <a href="#rankings" className="hover:text-emerald-500 transition-colors">Global Rankings</a>
-        <a href="#awards" className="hover:text-emerald-500 transition-colors">Awards</a>
-        <a href="#contact" className="hover:text-emerald-500 transition-colors">Support Us</a>
-      </div>
-    </div>
-  </div>
-);
-
-const Footer = () => (
-  <footer className="bg-slate-950 py-20 px-8 relative z-20 text-slate-500">
-    <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
-      <div className="flex flex-col items-center lg:items-start gap-4">
-        <p className="text-[15px] font-medium tracking-wide max-w-md leading-[1.8]">
-          Building the blueprint for schools, universities, and educators to design, execute, and sustain zero-carbon educational ecosystems globally.
-        </p>
-        <a href="mailto:contact@greenmentors.org" className="inline-flex items-center gap-2 text-emerald-600 font-bold text-sm mt-3 hover:text-emerald-400 transition-colors">
-          <Mail size={16} />
-          contact@greenmentors.org
-        </a>
-      </div>
-      <div className="flex flex-col items-center lg:items-end gap-8">
-        <div className="flex gap-6">
-          <a href="#twitter" aria-label="Twitter" className="text-slate-600 hover:text-slate-300 transition-colors"><SOCIAL_ICONS.Twitter size={22} /></a>
-          <a href="#linkedin" aria-label="LinkedIn" className="text-slate-600 hover:text-slate-300 transition-colors"><SOCIAL_ICONS.Linkedin size={22} /></a>
-          <a href="#facebook" aria-label="Facebook" className="text-slate-600 hover:text-slate-300 transition-colors"><SOCIAL_ICONS.Facebook size={22} /></a>
-        </div>
-        <p className="text-[12px] font-medium tracking-widest uppercase">
-          &copy; {new Date().getFullYear()} Green Mentors. All Rights Reserved.
-        </p>
-      </div>
-    </div>
-  </footer>
-);
-
 export default function HomePage() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-
-      const sections = ['home', ...NAV_LINKS.map(link => link.href.substring(1))];
-      let current = 'home';
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el && window.scrollY >= (el.offsetTop - 250)) {
-          current = section;
-        }
-      }
-      setActiveSection(current);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-white text-slate-800 font-sans selection:bg-emerald-200 selection:text-emerald-950">
-      <FloatingQuickNav activeSection={activeSection} />
-      <MobileNav />
-      <Header />
-      <MainNav isScrolled={isScrolled} />
-      <main>
-        <HeroSection />
-        <EcosystemLinksSection />
-        <ImpactSection />
-        <MegaNavSection />
-      </main>
-      <MiniFooterStrip />
-      <Footer />
+    <div className="bg-white text-slate-800 font-sans selection:bg-emerald-200 selection:text-emerald-950">
+      <HeroSection />
+      <EcosystemLinksSection />
+      <ImpactSection />
+      <MegaNavSection />
     </div>
   );
 }
