@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, use } from 'react';
 import { apiFetch, updatePageContent, getPageHistory } from '@/lib/api';
 import { ArrowLeft, Save, Clock, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 
-export default function PageEditor({ params }: { params: { id: string } }) {
+export default function PageEditor({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const [page, setPage] = useState<any>(null);
   const [history, setHistory] = useState<any[]>([]);
   const [contentStr, setContentStr] = useState('{}');
@@ -14,17 +15,17 @@ export default function PageEditor({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     fetchData();
-  }, [params.id]);
+  }, [id]);
 
   const fetchData = async () => {
     try {
-      const pageData = await apiFetch(`/pages/id/${params.id}`);
+      const pageData = await apiFetch(`/pages/id/${id}`);
       setPage(pageData);
       
       // If content exists, format it beautifully. If not, seed empty object.
       setContentStr(JSON.stringify(pageData.content || {}, null, 2));
 
-      const historyData = await getPageHistory(params.id);
+      const historyData = await getPageHistory(id);
       setHistory(historyData || []);
     } catch (e) {
       console.error(e);
@@ -40,7 +41,7 @@ export default function PageEditor({ params }: { params: { id: string } }) {
       // Validate JSON
       const parsedContent = JSON.parse(contentStr);
       
-      await updatePageContent(params.id, {
+      await updatePageContent(id, {
         content: parsedContent
       });
 
